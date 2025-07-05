@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Clone QMK Firmware
-        run: git clone --depth 1 https://github.com/qmk/qmk_firmware.git
+        run: git clone --depth 1 https://github.com/${{ github.repository }} qmk_firmware
 
       - name: Copy your layout into QMK source
         run: |
