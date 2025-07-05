@@ -3,7 +3,7 @@ name: Build Sofle Pro Firmware from layout.json
 on:
   push:
     paths:
-      - 'keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json'
+      - 'keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json'
       - '.github/workflows/qmk_json_build.yml'
 
 jobs:
@@ -29,17 +29,19 @@ jobs:
         run: |
           python3 -m pip install qmk
           qmk config user.keyboard=mechboards/sofle/pro
-          qmk config user.keymap=dencho_map
+          qmk config user.keymap=dencho_keymap
 
       - name: Convert layout.json to keymap.c
         run: |
-          qmk json2c -kb mechboards/sofle/pro -km dencho_map keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json
+          qmk json2c -kb mechboards/sofle/pro -km dencho_keymap \
+            -o keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/keymap.c \
+            keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json
 
-      - name: Build Sofle Firmware
+      - name: Compile Sofle Firmware
         run: |
-          make mechboards/sofle/pro:dencho_map
+          make mechboards/sofle/pro:dencho_keymap
 
-      - name: Upload Firmware
+      - name: Upload Firmware Artifact
         uses: actions/upload-artifact@v4
         with:
           name: sofle-pro-firmware
