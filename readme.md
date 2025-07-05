@@ -1,36 +1,16 @@
-# Quantum Mechanical Keyboard Firmware
+# Denchos Fork of Quantum Mechanical Keyboard Firmware
 
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
-[![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/qmk)
-[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
-[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
-[![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
 
-This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the Clueboard product line.
+Leaving notes here for myself cause ill probably forget how to do anything in the future.
 
-## Documentation
+I made a custom workflow that should recreate my keyboards firmware with the updated keymapping pulled from [QMK Configurator](https://config.qmk.fm/#/mechboards/sofle/pro/LAYOUT)
 
-* [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
+To update my keyboard layout:
 
-The docs are powered by [VitePress](https://vitepress.dev/). They are also viewable offline; see [Previewing the Documentation](https://docs.qmk.fm/#/contributing?id=previewing-the-documentation) for more details.
-
-You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls).
-
-## Supported Keyboards
-
-* [Planck](/keyboards/planck/)
-* [Preonic](/keyboards/preonic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Clueboard](/keyboards/clueboard/)
-* [Cluepad](/keyboards/clueboard/17/)
-* [Atreus](/keyboards/atreus/)
-
-The project also includes community support for [lots of other keyboards](/keyboards/).
-
-## Maintainers
-
-QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
-
-## Official Website
-
-[qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+1. Get the current layout from this repo at qmk_firmware\keyboards\mechboards\sofle\pro\keymaps\dencho_keymap\layout.json
+2. Upload that layout.json file to the web app [QMK Configurator](https://config.qmk.fm/#/mechboards/sofle/pro/LAYOUT) via the nifty buttons
+3. Edit the keymap to w/e you want
+4. Download the KeymapJson, no you dont need to compile it.
+5. Push the new keymap.json as the updated layout.json file at  qmk_firmware\keyboards\mechboards\sofle\pro\keymaps\dencho_keymap\layout.json
+6. Boom the custom workflow should handle the rest and publish a release with the update firmware for my baby keyboard.
