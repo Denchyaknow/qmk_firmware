@@ -24,15 +24,15 @@ jobs:
           python3 -m pip install qmk
           qmk setup -y
           qmk config user.keyboard=mechboards/sofle/pro
-          qmk config user.keymap=dencho_map
+          qmk config user.keymap=dencho_keymap
 
       - name: Convert layout.json to keymap.c
         run: |
-          qmk json2c -kb mechboards/sofle/pro -km dencho_map keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json
+          qmk json2c -kb mechboards/sofle/pro -km dencho_map keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json
 
       - name: Compile firmware
         run: |
-          qmk compile -kb mechboards/sofle/pro -km dencho_map
+          qmk compile -kb mechboards/sofle/pro -km dencho_keymap
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
