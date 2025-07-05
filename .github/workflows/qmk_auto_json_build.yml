@@ -1,20 +1,21 @@
-name: Auto Build QMK from JSON
+name: Auto Build QMK Firmware from layout.json
 
 on:
   push:
     paths:
       - 'keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json'
-      - '.github/workflows/**'
+      - '.github/workflows/qmk_json_build.yml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+      - name: Checkout QMK repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -29,12 +30,10 @@ jobs:
         run: |
           qmk json2c -kb mechboards/sofle/pro -km dencho_map keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json
 
-      - name: Compile Firmware
+      - name: Compile firmware
         run: |
           qmk compile -kb mechboards/sofle/pro -km dencho_map
 
-      - name: Upload Compiled Firmware
-        uses: actions/upload-artifact@v3
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
         with:
-          name: dencho-sofle-firmware
-          path: "*.hex"
