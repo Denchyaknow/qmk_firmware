@@ -60,7 +60,7 @@ jobs:
           name: sofle-pro-firmware
           path: qmk_firmware/*.hex
 
-      - name: Create GitHub Release
+      - name: Create GitHub Release and Upload HEX
         uses: softprops/action-gh-release@v1
         with:
           tag_name: dencho-build-${{ github.run_number }}
@@ -69,12 +69,6 @@ jobs:
             Firmware build from latest layout.json push.
             - Keyboard: mechboards/sofle/pro
             - Keymap: dencho_keymap
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload HEX to Release
-        uses: softprops/action-gh-release@v1
-        with:
           files: qmk_firmware/*.hex
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
