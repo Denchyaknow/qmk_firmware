@@ -1,9 +1,9 @@
-name: Auto Build QMK Firmware from layout.json
+name: Build Sofle Pro Firmware from layout.json
 
 on:
   push:
     paths:
-      - 'keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json'
+      - 'keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json'
       - '.github/workflows/qmk_json_build.yml'
 
 jobs:
@@ -11,30 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout QMK repo
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - name: Install AVR Toolchain (Minimal)
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            gcc-avr \
+            avr-libc \
+            binutils-avr \
+            dfu-programmer \
+            make \
+            python3-pip
 
-      - name: Install QMK CLI
+      - name: Install QMK CLI (No full setup)
         run: |
           python3 -m pip install qmk
-          qmk setup -y
           qmk config user.keyboard=mechboards/sofle/pro
-          qmk config user.keymap=dencho_keymap
+          qmk config user.keymap=dencho_map
 
       - name: Convert layout.json to keymap.c
         run: |
-          qmk json2c -kb mechboards/sofle/pro -km dencho_keymap keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json
+          qmk json2c -kb mechboards/sofle/pro -km dencho_map keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json
 
-      - name: Compile firmware
+      - name: Build Sofle Firmware
         run: |
-          qmk compile -kb mechboards/sofle/pro -km dencho_keymap
+          make mechboards/sofle/pro:dencho_map
 
-      - name: Upload firmware
+      - name: Upload Firmware
         uses: actions/upload-artifact@v4
         with:
           name: sofle-pro-firmware
