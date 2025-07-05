@@ -11,16 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Your Repo (for layout.json)
+      - name: Checkout Your Repo (layout source)
         uses: actions/checkout@v4
 
-      - name: Clone Official QMK Firmware
-        run: |
-          git clone --depth 1 https://github.com/qmk/qmk_firmware.git
-          cp -r keyboards/qmk_firmware/keyboards/mechboards/sofle/pro/keymaps/dencho_keymap \
-                qmk_firmware/keyboards/mechboards/sofle/pro/keymaps/
+      - name: Clone QMK Firmware
+        run: git clone --depth 1 https://github.com/qmk/qmk_firmware.git
 
-      - name: Install AVR Toolchain
+      - name: Copy your layout into QMK source
+        run: |
+          mkdir -p qmk_firmware/keyboards/mechboards/sofle/pro/keymaps/dencho_keymap
+          cp keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json \
+             qmk_firmware/keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/
+
+      - name: Install AVR Toolchain (Minimal)
         run: |
           sudo apt update
           sudo apt install -y \
@@ -50,7 +53,7 @@ jobs:
           cd qmk_firmware
           make mechboards/sofle/pro:dencho_keymap
 
-      - name: Upload Firmware
+      - name: Upload Firmware Artifact
         uses: actions/upload-artifact@v4
         with:
           name: sofle-pro-firmware
