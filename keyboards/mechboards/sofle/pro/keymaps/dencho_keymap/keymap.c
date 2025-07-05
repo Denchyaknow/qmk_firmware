@@ -205,21 +205,12 @@ static void render_anim(void) {
 }
 
 // Used to draw on to the oled screen
-void oled_task_user(void) {
-    render_anim();  // renders pixelart
-
-    oled_set_cursor(0, 0);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
-    sprintf(wpm_str, "WPM:%03d", get_current_wpm());  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
-    oled_write(wpm_str, false);                       // writes wpm on top left corner of string
-
-    led_t led_state = host_keyboard_led_state();  // caps lock stuff, prints CAPS on new line if caps led is on
-    oled_set_cursor(0, 1);
-    oled_write_P(led_state.caps_lock ? PSTR("CAPS") : PSTR("       "), false);  
-    bool oled_task_user(void) {
-        if (is_keyboard_master()) {
-            render_bongo();  // Animation function from bongo.h
-        }
-        return false;
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        render_pokemon();  // Shows the cat
+    } else {
+        oled_write_ln_P(PSTR("Sofle"), false);  // Slave screen text
     }
+    return false;
 }
 #endif
