@@ -3,7 +3,7 @@ name: Auto Build QMK Firmware from layout.json
 on:
   push:
     paths:
-      - 'keyboards/mechboards/sofle/pro/keymaps/dencho_map/layout.json'
+      - 'keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json'
       - '.github/workflows/qmk_json_build.yml'
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Convert layout.json to keymap.c
         run: |
-          qmk json2c -kb mechboards/sofle/pro -km dencho_map keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json
+          qmk json2c -kb mechboards/sofle/pro -km dencho_keymap keyboards/mechboards/sofle/pro/keymaps/dencho_keymap/layout.json
 
       - name: Compile firmware
         run: |
