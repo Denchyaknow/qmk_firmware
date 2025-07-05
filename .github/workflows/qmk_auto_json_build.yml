@@ -1,4 +1,4 @@
-name: Auto Build QMK Firmware from layout.json
+name: Auto Build 2 QMK Firmware from layout.json
 
 on:
   push:
