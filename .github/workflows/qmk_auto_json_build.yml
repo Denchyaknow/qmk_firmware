@@ -41,7 +41,7 @@ jobs:
           qmk config user.keyboard=mechboards/sofle/pro
           qmk config user.keymap=dencho_keymap
 
-      - name: Convert layout.json to keymap.c
+      - name: Converty layout.json to keymap.c
         run: |
           cd qmk_firmware
           qmk json2c -kb mechboards/sofle/pro -km dencho_keymap \
