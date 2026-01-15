@@ -128,7 +128,7 @@
       "KC_TRNS",
       "KC_TRNS",
       "KC_TRNS",
-      "KC_PIPE"
+      "KC_BSLS"
     ],
     [
       "UG_TOGG",
@@ -179,7 +179,7 @@
       "KC_TRNS",
       "KC_UP",
       "KC_TRNS",
-      "KC_BSLS",
+      "KC_TRNS",
       "KC_TRNS",
       "MS_BTN3",
       "MS_BTN2",
